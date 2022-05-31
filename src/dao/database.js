@@ -1,10 +1,11 @@
 const mysql = require("mysql");
 //create connection
 const mysqlConnection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "toor",
-  database: "iot_temp",
+  host: "b5ygse9msgvd6ay80xpl-mysql.services.clever-cloud.com",
+  user: "umom49g0lmbfz3zp",
+  password: "Vg9dnAv197kOzvMeMGkJ",
+  database: "b5ygse9msgvd6ay80xpl",
+  port: 3306,
 });
 
 mysqlConnection.connect((error) => {
