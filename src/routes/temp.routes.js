@@ -38,6 +38,8 @@ router.put("/api/temp", async (req, res) => {
   try {
     // get temperature
     const { temp } = req.body;
+    // get socket.io
+    const io = req.io;
 
     // validate temp
     if (!temp || temp === undefined) {
@@ -47,6 +49,10 @@ router.put("/api/temp", async (req, res) => {
 
     // update temperature
     const response = await setTemperature(temp);
+
+    // socket.io
+    // create an event for the temperature
+    io.emit("server:temperature", temp);
 
     // send status
     res.status(200).json(response);

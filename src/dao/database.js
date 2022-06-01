@@ -21,15 +21,25 @@ const handleDisconnect = () => {
 
   mysqlConnection.connect((error) => {
     if (error) {
-      console.error(error);
-
-      // lost connection error
-      if (error.code === "PROTOCOL_CONNECTION_LOST") {
-        setTimeout(handleDisconnect, 2000);
-      }
+      console.log("===ERROR===");
+      console.error(error.code);
+      setTimeout(handleDisconnect, 2000);
     }
 
+    // there is no error in the connection to the database
     console.log("Connected to database");
+  });
+
+  mysqlConnection.on("error", (error) => {
+    console.log("===ERROR===");
+    console.error(error);
+    // lost connection error
+    if (error.code === "PROTOCOL_CONNECTION_LOST") {
+      console.log("Attempting to connect again...");
+      handleDisconnect();
+    } else {
+      throw error;
+    }
   });
 };
 
