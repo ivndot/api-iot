@@ -22,7 +22,6 @@ const handleDisconnect = () => {
   mysqlConnection.connect(error => {
     if (error) {
       console.log("===ERROR===");
-      console.error(error);
       console.error(error.code);
       setTimeout(handleDisconnect, 2000);
     } else {
