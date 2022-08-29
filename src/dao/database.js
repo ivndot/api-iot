@@ -9,7 +9,7 @@ const dbConfig = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE_NAME,
-  port: process.env.DB_PORT,
+  port: process.env.DB_PORT
 };
 
 // declare connection variable
@@ -19,18 +19,19 @@ const handleDisconnect = () => {
   // initialize connectioin
   mysqlConnection = mysql.createConnection(dbConfig);
 
-  mysqlConnection.connect((error) => {
+  mysqlConnection.connect(error => {
     if (error) {
       console.log("===ERROR===");
+      console.error(error);
       console.error(error.code);
       setTimeout(handleDisconnect, 2000);
+    } else {
+      // there is no error in the connection to the database
+      console.log("Connected to database");
     }
-
-    // there is no error in the connection to the database
-    console.log("Connected to database");
   });
 
-  mysqlConnection.on("error", (error) => {
+  mysqlConnection.on("error", error => {
     console.log("===ERROR===");
     console.error(error);
     // lost connection error
