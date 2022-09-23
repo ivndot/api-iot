@@ -21,7 +21,7 @@ router.get("/api/temp", async (req, res) => {
     const id_temp = 1;
     const temperature = await getTemperature(id_temp);
     // send data
-    res.status(200).json(temperature[0]);
+    res.status(200).json(temperature);
   } catch (error) {
     // send error
     console.error(error);

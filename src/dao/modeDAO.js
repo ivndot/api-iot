@@ -11,16 +11,16 @@ const { getLEDS, setLED } = require("./ledDAO");
 const getMode = async () => {
   try {
     // get leds data
-    const led = await getLEDS();
+    const leds = await getLEDS();
     // get fan data
     const fan = await getFan();
 
-    const led1 = led.find((item) => item.name_led === "green");
-    const led2 = led.find((item) => item.name_led === "yellow");
+    const led1 = leds.find(item => item.name_led === "green");
+    const led2 = leds.find(item => item.name_led === "yellow");
 
-    const modeFan = fan[0].mode_fan;
-    const statusFan = fan[0].status_fan;
-    const speedFan = fan[0].speed_fan;
+    const modeFan = fan.mode_fan;
+    const statusFan = fan.status_fan;
+    const speedFan = fan.speed_fan;
     const led1Status = led1.status_led;
     const led2Status = led2.status_led;
 
@@ -37,7 +37,7 @@ const getMode = async () => {
  * @param {Object} mode The mode object
  * @returns An object with status of the operation
  */
-const setMode = async (mode) => {
+const setMode = async mode => {
   try {
     const { modeFan, statusFan, speedFan, led1Status, led2Status } = mode;
     // update fan
